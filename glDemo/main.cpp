@@ -39,6 +39,8 @@ int main() {
 	// Initialise glfw and setup window
 	glfwInit();
 
+	
+
 	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
 	glfwWindowHint(GLFW_OPENGL_COMPAT_PROFILE, GLFW_TRUE);
 
@@ -71,14 +73,14 @@ int main() {
 
 	// Initialise scene - geometry and shaders etc
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f); // setup background colour to be black
-
+	gluOrtho2D(-3.0f, 3.0f, 0.0f, 2.0f);
 
 	//
 	// Setup textures
 	//
 
 	// Load image file from disk
-	auto textureImageFile = string("Assets\\Textures\\te.png");
+	auto textureImageFile = string("Assets\\Textures\\pwetty.png");
 	FIBITMAP* bitmap = FreeImage_Load(FIF_PNG, textureImageFile.c_str(), BMP_DEFAULT);
 
 	if (bitmap) {
@@ -153,26 +155,9 @@ void renderScene()
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, playerTexture);
 
-	glBegin(GL_QUADS);
+	drawL();
 
-	glTexCoord2f(0.0f, 1.0f);
-	glVertex2f(-0.9f, 0.5f);
-
-	glTexCoord2f(1.0f, 1.0f);
-	glVertex2f(0.9f, 0.5f);
-
-	glTexCoord2f(1.0f, 0.0f);
-	glVertex2f(0.9f, -0.5f);
-
-	glTexCoord2f(0.0f, 0.0f);
-	glVertex2f(-0.9f, -0.5f);
-
-	glEnd();
-
-	glDisable(GL_BLEND);
-	glDisable(GL_TEXTURE_2D);
 }
-
 
 // Function to call when window resized
 void resizeWindow(GLFWwindow* window, int width, int height)
@@ -255,23 +240,30 @@ void drawWeigh() {
 void drawL() {
 	glBegin(GL_TRIANGLE_STRIP);
 
+	glTexCoord2f(-3.0, 1.0);
 	glVertex2f(-3.0, 1.75);
 
+	glTexCoord2f(-1.75, 1.0);
 	glVertex2f(-1.75, 1.75);
 
+	glTexCoord2f(-3.0, 0.0);
 	glVertex2f(-3.0, 0.0);
 
-	glVertex2f(-1.75, 0.40);
+	glTexCoord2f(-1.75, 0.4);
+	glVertex2f(-1.75, 0.4);
 
+	glTexCoord2f(1.5, 0.0);
 	glVertex2f(1.5, 0.0);
 
-	glVertex2f(1.5, 0.40);
+	glTexCoord2f(1.5, 0.4);
+	glVertex2f(1.5, 0.4);
+
 
 	glEnd();
 }
 
 void drawHex() {
-	glBegin(GL_LINE_LOOP);
+	glBegin(GL_TRIANGLE_FAN);
 	float x;
 	float y;
 	for (int i = 0; i <= 6; i++) {
