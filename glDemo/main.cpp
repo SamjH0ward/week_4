@@ -14,11 +14,19 @@ GLuint playerTexture;
 const unsigned int initWidth = 512;
 const unsigned int initHeight = 512;
 
+const float pi = 3.141593;
+const float thetaStepSize = 2.0f * pi / float(6);
+
+
 // Function prototypes
 void renderScene();
 void resizeWindow(GLFWwindow* window, int width, int height);
 void keyboardHandler(GLFWwindow* window, int key, int scancode, int action, int mods);
 void updateScene();
+void drawWeigh();
+void drawL();
+void drawHex();
+
 
 
 int main() {
@@ -70,7 +78,7 @@ int main() {
 	//
 
 	// Load image file from disk
-	auto textureImageFile = string("Assets\\Textures\\player1_ship.png");
+	auto textureImageFile = string("Assets\\Textures\\te.png");
 	FIBITMAP* bitmap = FreeImage_Load(FIF_PNG, textureImageFile.c_str(), BMP_DEFAULT);
 
 	if (bitmap) {
@@ -148,16 +156,16 @@ void renderScene()
 	glBegin(GL_QUADS);
 
 	glTexCoord2f(0.0f, 1.0f);
-	glVertex2f(-0.5f, 0.5f);
+	glVertex2f(-0.9f, 0.5f);
 
 	glTexCoord2f(1.0f, 1.0f);
-	glVertex2f(0.5f, 0.5f);
+	glVertex2f(0.9f, 0.5f);
 
 	glTexCoord2f(1.0f, 0.0f);
-	glVertex2f(0.5f, -0.5f);
+	glVertex2f(0.9f, -0.5f);
 
 	glTexCoord2f(0.0f, 0.0f);
-	glVertex2f(-0.5f, -0.5f);
+	glVertex2f(-0.9f, -0.5f);
 
 	glEnd();
 
@@ -196,7 +204,92 @@ void keyboardHandler(GLFWwindow* window, int key, int scancode, int action, int 
 }
 
 
+
+
+void drawWeigh() {
+
+	glBegin(GL_TRIANGLES);
+	glVertex2f(0, 1);
+	glVertex2f(0.6, 0);
+	glVertex2f(-0.6, 0);
+
+	glVertex2f(0, 1);
+	glVertex2f(1.8, 1.125);
+	glVertex2f(0, 1.25);
+
+	glVertex2f(0, 1);
+	glVertex2f(-1.8, 1.125);
+	glVertex2f(0, 1.25);
+
+
+	glEnd();
+
+	glBegin(GL_LINE_LOOP);
+	glVertex2f(1.8, 1.125);
+	glVertex2f(2.4, 0.75);
+	glVertex2f(1.2, 0.75);
+	glEnd();
+
+	glBegin(GL_LINE_LOOP);
+	glVertex2f(-1.8, 1.125);
+	glVertex2f(-2.4, 0.75);
+	glVertex2f(-1.2, 0.75);
+	glEnd();
+
+	glBegin(GL_TRIANGLE_FAN);
+	glVertex2f(2.4, 0.75);
+	glVertex2f(1.2, 0.75);
+	glVertex2f(1.2, 0.5);
+	glVertex2f(2.4, 0.5);
+	glEnd();
+
+	glBegin(GL_TRIANGLE_FAN);
+	glVertex2f(-2.4, 0.75);
+	glVertex2f(-1.2, 0.75);
+	glVertex2f(-1.2, 0.5);
+	glVertex2f(-2.4, 0.5);
+	glEnd();
+}
+
+
+void drawL() {
+	glBegin(GL_TRIANGLE_STRIP);
+
+	glVertex2f(-3.0, 1.75);
+
+	glVertex2f(-1.75, 1.75);
+
+	glVertex2f(-3.0, 0.0);
+
+	glVertex2f(-1.75, 0.40);
+
+	glVertex2f(1.5, 0.0);
+
+	glVertex2f(1.5, 0.40);
+
+	glEnd();
+}
+
+void drawHex() {
+	glBegin(GL_LINE_LOOP);
+	float x;
+	float y;
+	for (int i = 0; i <= 6; i++) {
+
+		 x = cosf(thetaStepSize * float(i));
+		 y = sinf(thetaStepSize * float(i));
+
+		glVertex2f(x, y);
+	}
+
+	glEnd();
+
+}
+
+
 // Function called to animate elements in the scene
 void updateScene() {
 }
+
+
 
