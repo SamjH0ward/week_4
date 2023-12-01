@@ -240,22 +240,22 @@ void drawWeigh() {
 void drawL() {
 	glBegin(GL_TRIANGLE_STRIP);
 
-	glTexCoord2f(-3.0, 1.0);
+	glTexCoord2f(0, 1.0);
 	glVertex2f(-3.0, 1.75);
 
-	glTexCoord2f(-1.75, 1.0);
+	glTexCoord2f(0.277777778, 1.0);
 	glVertex2f(-1.75, 1.75);
 
-	glTexCoord2f(-3.0, 0.0);
+	glTexCoord2f(0, 0.0);
 	glVertex2f(-3.0, 0.0);
 
-	glTexCoord2f(-1.75, 0.4);
+	glTexCoord2f(0.27777778, 0.228571429);
 	glVertex2f(-1.75, 0.4);
 
-	glTexCoord2f(1.5, 0.0);
+	glTexCoord2f(1, 0.0);
 	glVertex2f(1.5, 0.0);
 
-	glTexCoord2f(1.5, 0.4);
+	glTexCoord2f(1, 0.228571429);
 	glVertex2f(1.5, 0.4);
 
 
